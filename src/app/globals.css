@@ -1,33 +1,42 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .animate-fade-slide-in {
+    animation: fadeSlideIn 1s ease-out forwards;
+  }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @keyframes fadeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
 @font-face {
   font-family: 'Inter';
   src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
-  font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Neue Montreal';
-  src: url('/fonts/PPNeueMontreal-Book.otf') format('opentype');
-  font-weight: 400;
+  src: url('/fonts/PPNeueMontreal-Bold.otf') format('opentype');
+  font-weight: 700;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/fonts/PPNeueMontreal-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
 }
 
 body {

@@ -5,30 +5,27 @@
 ├── next.config.ts
 ├── package-lock.json
 ├── package.json
+├── pages
 ├── postcss.config.mjs
 ├── public
-│   ├── file.svg
-│   ├── fonts
-│   │   ├── Inter-Italic-VariableFont_opsz,wght.ttf
-│   │   ├── Inter-VariableFont_opsz,wght.ttf
-│   │   ├── PPNeueMontreal-Bold.otf
-│   │   ├── PPNeueMontreal-Book.otf
-│   │   ├── PPNeueMontreal-Italic.otf
-│   │   ├── PPNeueMontreal-Medium.otf
-│   │   ├── PPNeueMontreal-SemiBolditalic.otf
-│   │   └── PPNeueMontreal-Thin.otf
-│   ├── globe.svg
-│   ├── next.svg
-│   ├── vercel.svg
-│   └── window.svg
+│   └── fonts
+│       ├── Inter-Italic-VariableFont_opsz,wght.ttf
+│       ├── Inter-VariableFont_opsz,wght.ttf
+│       ├── PPNeueMontreal-Bold.otf
+│       ├── PPNeueMontreal-Book.otf
+│       ├── PPNeueMontreal-Italic.otf
+│       ├── PPNeueMontreal-Medium.otf
+│       ├── PPNeueMontreal-SemiBolditalic.otf
+│       └── PPNeueMontreal-Thin.otf
 ├── src
-│   ├── app
-│   │   ├── favicon.ico
-│   │   ├── globals.css
-│   │   ├── layout.tsx
-│   │   └── page.tsx
+│   └── app
+│       ├── favicon.ico
+│       ├── globals.css
+│       ├── layout.tsx
+│       └── page.tsx
 ├── structure.txt
-├── tailwind.config.ts
+├── tailwind.config.js
+├── tailwind.config.md
 └── tsconfig.json
 
-6 directories, 33 files
+6 directories, 23 files

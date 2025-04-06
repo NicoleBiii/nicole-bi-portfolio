@@ -47,5 +47,6 @@ export default {
   variants: {
     scrollSnapType: ['responsive'],
   },
+  darkMode: 'class',
 }
 

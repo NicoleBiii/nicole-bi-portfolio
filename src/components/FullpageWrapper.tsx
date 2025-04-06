@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
+import Navbar from "./Navbar";
 
 const sections = ["home", "about", "projects", "contact"]
 
@@ -72,6 +73,7 @@ export default function FullpageWrapper() {
 
   return (
     <div ref={containerRef} className="relative h-screen overflow-hidden">
+        <Navbar />
       {/* Navigation dots */}
       <div className="fixed top-1/2 right-6 -translate-y-1/2 flex flex-col gap-3 z-50 items-center">
         {sections.map((id) => (

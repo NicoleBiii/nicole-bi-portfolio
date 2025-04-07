@@ -61,6 +61,15 @@ export default function Navbar({ active }: NavbarProps) {
     }
   };
 
+  const handleDarkModeToggle = () => {
+    if (darkMode) {
+      lottieRef.current?.playSegments([0, 77], true)
+    } else {
+      lottieRef.current?.playSegments([77, 154], true)
+    }
+    toggleDarkMode()
+  }
+
   useEffect(() => {
     lottieRef.current?.setSpeed(0.4);
   }, []);
@@ -122,7 +131,7 @@ export default function Navbar({ active }: NavbarProps) {
           )})}
             <motion.button
               variants={navItem}
-              onClick={toggleDarkMode}
+              onClick={handleDarkModeToggle}
               title="Toggle Dark Mode"
               className="relative w-[30px] h-[30px]"
             >

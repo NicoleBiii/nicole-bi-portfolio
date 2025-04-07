@@ -97,7 +97,7 @@ export default function Navbar({ active }: NavbarProps) {
           className="relative w-[60px] h-[50px] md:w-[100px] md:h-[80px]"
           >
         <Image
-          src={darkMode ? "/icons/N-dark.svg" : "/icons/N.svg"}
+          src={darkMode ? "/icons/N-dark.svg" : "/icons/N-blue.svg"}
           alt="Home"
           fill
           priority

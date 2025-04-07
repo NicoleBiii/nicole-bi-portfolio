@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef, useMemo } from "react"
 import Navbar from "./Navbar"
+import DynamicBackground from "./DynamicBackground";
 import { useDarkMode } from "@/context/DarkModeContext";
 
 const sections = ["home", "about", "projects", "contact"]
@@ -105,7 +106,8 @@ export default function FullpageWrapper() {
       <div className="h-screen snap-y snap-mandatory scroll-smooth overflow-y-auto no-scrollbar">
         <section
           id="home"
-          className="h-screen w-full flex flex-col justify-center bg-black text-white snap-start">
+          className="h-screen w-full flex flex-col justify-center text-white snap-start">
+            <DynamicBackground />
           <h1 className="text-5xl md:text-7xl  opacity-0 animate-fade-slide-in">Nicole Bi</h1>
           <p className="mt-4 text-xl text-gray-400 opacity-0 animate-fade-slide-in delay-500">Fullstack developer</p>
         </section>

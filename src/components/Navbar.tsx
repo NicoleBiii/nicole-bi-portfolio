@@ -7,9 +7,22 @@ import MobileMenu from "./MobileMenu"
 import dynamic from "next/dynamic";
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 import darkModeAnimation from '../../public/animations/darkmode-toggle.json'
-import { log } from "console";
 
 const sections = ["About", "Projects", "Contact"];
+
+const navContainer = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const navItem = {
+  hidden: { opacity: 0, y: -20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
 
 interface NavbarProps {
   active: string
@@ -18,6 +31,7 @@ interface NavbarProps {
 export default function Navbar({ active }: NavbarProps) {
   const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [lottieLoaded, setLottieLoaded] = useState(false);
 
   const lottieRef = useRef<any>(null)
 
@@ -68,23 +82,38 @@ export default function Navbar({ active }: NavbarProps) {
         toggleDarkMode={() => setDarkMode((prev) => !prev)}
       />
 
-      <nav className="flex items-center justify-between h-12 z-50 md:h-16 backdrop-blur-md px-4 md:px-8">
+      <motion.nav 
+        variants={navContainer}
+        initial="hidden"
+        animate="show"
+        className="flex items-center justify-between h-12 z-50 md:h-16 backdrop-blur-md px-4 md:px-8"
+      >
         {/* Logo */}
-        <button onClick={() => handleScrollTo("home")} className="relative w-[60px] h-[50px] md:w-[100px] md:h-[80px]">
-          <Image
-            src={darkMode ? "/icons/N-dark.svg" : "/icons/N.svg"}
-            alt="Home"
-            fill
-            className="cursor-pointer"
-          />
-        </button>
+        <motion.button 
+          variants={navItem}
+          onClick={() => handleScrollTo("home")} 
+          className="relative w-[60px] h-[50px] md:w-[100px] md:h-[80px]"
+          >
+        <Image
+          src={darkMode ? "/icons/N-dark.svg" : "/icons/N.svg"}
+          alt="Home"
+          fill
+          priority
+          placeholder="empty"
+          className="cursor-pointer transition-opacity duration-500"
+        />
+        </motion.button>
 
-        <div className="hidden md:flex items-center gap-6">
+        <motion.div 
+          variants={navContainer}
+          className="hidden md:flex items-center gap-6"
+        >
           {sections.map((section) => {
             const sectionId = section.toLowerCase();
             return(
-            <button
+            <motion.button
               key={section}
+              variants={navItem}
               onClick={() => handleNavClick(sectionId)}
               className={`text-base font-medium transition-all duration-300
                 ${active === sectionId ? 
@@ -96,34 +125,39 @@ export default function Navbar({ active }: NavbarProps) {
                 hover:border-b-red-300 dark:hover:border-b-red-500`}
                 >
               {section}
-            </button>
+            </motion.button>
           )})}
-            <button
-            onClick={handleDarkModeToggle}
-            title="Toggle Dark Mode"
+            <motion.button
+              variants={navItem}
+              onClick={handleDarkModeToggle}
+              title="Toggle Dark Mode"
+              className="relative w-[30px] h-[30px]"
             >
+            {!lottieLoaded && (
+              <div className="absolute inset-0 animate-pulse bg-gray-300 dark:bg-gray-700 rounded" />
+            )}
             <Lottie
-                lottieRef={lottieRef}
-                animationData={darkModeAnimation}
-                loop={false}
-                autoplay={false}
-                style={{ width: 30, height: 30 }}
-                rendererSettings={{
-                  preserveAspectRatio: "xMidYMid slice",
-                }}
-                
+              lottieRef={lottieRef}
+              animationData={darkModeAnimation}
+              loop={false}
+              autoplay={false}
+              style={{ width: 30, height: 30, opacity: lottieLoaded ? 1 : 0 }}
+              rendererSettings={{
+                preserveAspectRatio: "xMidYMid slice",
+              }}
+              onDOMLoaded={() => setLottieLoaded(true)}
             />
-            </button>
-        </div>
+            </motion.button>
+        </motion.div>
 
         {/* Mobile menu icon */}
-        <button
+        <motion.button
           id="menu-toggle"
           onClick={() => setMenuOpen((prev) => !prev)}
           className="md:hidden text-2xl text-gray-800 dark:text-white">
           {menuOpen ? "✕" : "☰"}
-        </button>
-      </nav>
+        </motion.button>
+      </motion.nav>
     </header>
   );
 }

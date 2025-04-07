@@ -1,0 +1,42 @@
+.
+├── README.md
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── pages
+├── postcss.config.mjs
+├── public
+│   ├── animations
+│   │   └── darkmode-toggle.json
+│   ├── fonts
+│   │   ├── Inter-Italic-VariableFont_opsz,wght.ttf
+│   │   ├── Inter-VariableFont_opsz,wght.ttf
+│   │   ├── PPNeueMontreal-Bold.otf
+│   │   ├── PPNeueMontreal-Book.otf
+│   │   ├── PPNeueMontreal-Italic.otf
+│   │   ├── PPNeueMontreal-Medium.otf
+│   │   ├── PPNeueMontreal-SemiBolditalic.otf
+│   │   └── PPNeueMontreal-Thin.otf
+│   └── icons
+│       ├── N-dark.png
+│       ├── N-dark.svg
+│       ├── N.png
+│       └── N.svg
+├── src
+│   ├── app
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components
+│   │   ├── FullpageWrapper.tsx
+│   │   ├── MobileMenu.tsx
+│   │   └── Navbar.tsx
+│   └── libs
+├── structure.txt
+├── tailwind.config.js
+└── tsconfig.json
+
+10 directories, 30 files

@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import "./globals.css";
+import { DarkModeProvider } from "@/context/DarkModeContext";
+import type { Metadata } from "next";
 
 
 export const metadata: Metadata = {
@@ -13,9 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="antialiased overflow-y-auto no-scrollbar">
-        {children}
+        <DarkModeProvider>
+          {children}
+        </DarkModeProvider>
       </body>
     </html>
   );

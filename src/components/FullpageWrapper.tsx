@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef, useMemo } from "react"
 import Navbar from "./Navbar"
+import { useDarkMode } from "@/context/DarkModeContext";
 
 const sections = ["home", "about", "projects", "contact"]
 

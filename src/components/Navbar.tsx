@@ -8,6 +8,8 @@ import dynamic from "next/dynamic";
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 import darkModeAnimation from '../../public/animations/darkmode-toggle.json'
 
+import { useDarkMode } from "@/context/DarkModeContext";
+
 const sections = ["About", "Projects", "Contact"];
 
 const navContainer = {
@@ -29,7 +31,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ active }: NavbarProps) {
-  const [darkMode, setDarkMode] = useState(false);
+  const { darkMode, toggleDarkMode } = useDarkMode();
   const [menuOpen, setMenuOpen] = useState(false);
   const [lottieLoaded, setLottieLoaded] = useState(false);
 
@@ -59,15 +61,6 @@ export default function Navbar({ active }: NavbarProps) {
     }
   };
 
-  const handleDarkModeToggle = () => {
-    if (darkMode) {
-      lottieRef.current?.playSegments([0, 77], true)
-    } else {
-      lottieRef.current?.playSegments([77, 154], true)
-    }
-    setDarkMode(prev => !prev)
-  }
-
   useEffect(() => {
     lottieRef.current?.setSpeed(0.4);
   }, []);
@@ -79,7 +72,7 @@ export default function Navbar({ active }: NavbarProps) {
         toggle={() => setMenuOpen((prev) => !prev)}
         sections={sections}
         darkMode={darkMode}
-        toggleDarkMode={() => setDarkMode((prev) => !prev)}
+        toggleDarkMode={toggleDarkMode}
       />
 
       <motion.nav 
@@ -129,7 +122,7 @@ export default function Navbar({ active }: NavbarProps) {
           )})}
             <motion.button
               variants={navItem}
-              onClick={handleDarkModeToggle}
+              onClick={toggleDarkMode}
               title="Toggle Dark Mode"
               className="relative w-[30px] h-[30px]"
             >

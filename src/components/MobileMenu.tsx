@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Sun, Moon } from 'lucide-react'
 import { useDarkMode } from "@/context/DarkModeContext";
 
-
 interface MobileMenuProps {
   isOpen: boolean
   toggle: () => void
@@ -72,7 +71,7 @@ export default function MobileMenu({
           animate="visible"
           exit="exit"
           variants={containerVariants}
-          className="absolute top-16 right-4 w-1/3 bg-white/70 dark:bg-black/70 backdrop-blur-md z-50 shadow-xl rounded-xl"
+          className="absolute top-16 right-4 w-1/3 bg-white/20 dark:bg-black/40 backdrop-blur-md z-50 shadow-xl rounded-xl"
           ref={menuRef}
         >
           <div className="flex flex-col items-center py-4 gap-4">
@@ -87,7 +86,7 @@ export default function MobileMenu({
                     toggle()
                   }
                 }}
-                className="text-lg font-semibold text-gray-800 dark:text-white"
+                className="text-lg font-semibold text-white"
               >
                 {section}
               </motion.button>
@@ -98,7 +97,7 @@ export default function MobileMenu({
                 toggleDarkMode()
                 toggle()
               }}
-              className="text-gray-800 dark:text-white p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+              className="text-white p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
             >
               {darkMode ? <Moon size={24} /> : <Sun size={24} />}
             </motion.button>

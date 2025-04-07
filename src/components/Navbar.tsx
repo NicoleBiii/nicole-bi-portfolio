@@ -10,7 +10,7 @@ import darkModeAnimation from '../../public/animations/darkmode-toggle.json'
 
 import { useDarkMode } from "@/context/DarkModeContext";
 
-const sections = ["About", "Projects", "Contact"];
+const sections = ["About", "Skills", "Projects", "Contact"];
 
 const navContainer = {
   hidden: {},
@@ -119,12 +119,12 @@ export default function Navbar({ active }: NavbarProps) {
               onClick={() => handleNavClick(sectionId)}
               className={`text-base font-medium transition-all duration-300
                 ${active === sectionId ? 
-                    'border-b-2 border-b border-gray-800 dark:border-b-gray-100 font-bold' :
+                    'border-b-2 border-b border-gray-400 dark:border-b-gray-100 font-bold' :
                     'border-b-2 border-transparent'
                 } 
-                text-gray-800 dark:text-gray-100
+                text-gray-400 dark:text-gray-100
                 hover:scale-105 hover:-translate-y-[1px]
-                hover:border-b-gray-800 dark:hover:border-b-gray-100`}
+                hover:border-b-gray-400 dark:hover:border-b-gray-100`}
                 >
               {section}
             </motion.button>
@@ -156,7 +156,7 @@ export default function Navbar({ active }: NavbarProps) {
         <motion.button
           id="menu-toggle"
           onClick={() => setMenuOpen((prev) => !prev)}
-          className="md:hidden text-2xl text-gray-800 dark:text-white">
+          className="md:hidden text-2xl text-white">
           {menuOpen ? "✕" : "☰"}
         </motion.button>
       </motion.nav>

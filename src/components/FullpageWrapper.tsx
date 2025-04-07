@@ -5,7 +5,7 @@ import Navbar from "./Navbar"
 import DynamicBackground from "./DynamicBackground";
 import { useDarkMode } from "@/context/DarkModeContext";
 
-const sections = ["home", "about", "projects", "contact"]
+const sections = ["home", "about", "skills", "projects", "contact"]
 
 export default function FullpageWrapper() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -116,6 +116,12 @@ export default function FullpageWrapper() {
           id="about"
           className="h-screen w-full flex justify-center items-center bg-gray-900 text-white snap-start">
           About Me Section
+        </section>
+
+        <section
+          id="skills"
+          className="h-screen w-full flex justify-center items-center bg-gray-500 text-white snap-start">
+          Tech Stack Section
         </section>
 
         <section

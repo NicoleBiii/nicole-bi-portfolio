@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
-import Navbar from "./Navbar";
+import Navbar from "./Navbar"
 
 const sections = ["home", "about", "projects", "contact"]
 
@@ -72,8 +72,8 @@ export default function FullpageWrapper() {
   }, [])
 
   return (
-    <div ref={containerRef} className="relative h-screen overflow-hidden">
-        <Navbar />
+    <div ref={containerRef} className="relative h-screen">
+        <Navbar active={active} />
       {/* Navigation dots */}
       <div className="fixed top-1/2 right-6 -translate-y-1/2 flex flex-col gap-3 z-50 items-center">
         {sections.map((id) => (
@@ -88,7 +88,7 @@ export default function FullpageWrapper() {
       </div>
 
       {/* Scroll container */}
-      <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
+      <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth overflow-y-auto no-scrollbar">
         <section
           id="home"
           className="h-screen w-full flex flex-col justify-center bg-black text-white snap-start">

@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  box-sizing: border-box;
+}
+
+
 @layer utilities {
   .animate-fade-slide-in {
     animation: fadeSlideIn 1s ease-out forwards;
@@ -17,8 +23,20 @@
       transform: translateY(0);
     }
   }
-}
 
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+@layer base {
+  button {
+    border-style: solid;
+  }
+}
 @font-face {
   font-family: 'Inter';
   src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');

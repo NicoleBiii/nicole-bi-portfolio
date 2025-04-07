@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Sun, Moon } from 'lucide-react'
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 
 import Link from 'next/link'
 
@@ -44,6 +45,11 @@ export default function MobileMenu({
   // Close when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
+        const target = event.target as HTMLElement
+      
+        // Don't close if clicking the toggle button
+        if (target.closest('#menu-toggle')) return
+
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         toggle()
       }
@@ -68,7 +74,7 @@ export default function MobileMenu({
           animate="visible"
           exit="exit"
           variants={containerVariants}
-          className="absolute top-16 right-4 -translate-x-1/2 max-w-sm w-1/3 bg-white/70 dark:bg-black/70 backdrop-blur-md z-40 shadow-xl rounded-xl"
+          className="absolute top-16 right-4 w-1/3 bg-white/70 dark:bg-black/70 backdrop-blur-md z-50 shadow-xl rounded-xl"
           ref={menuRef}
         >
           <div className="flex flex-col items-center py-4 gap-4">

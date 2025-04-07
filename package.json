@@ -10,12 +10,15 @@
     "type": "module"
   },
   "dependencies": {
+    "@lottiefiles/dotlottie-react": "^0.13.3",
     "framer-motion": "^12.6.3",
     "fullpage.js": "^4.0.35",
+    "lottie-react": "^2.4.1",
     "lucide-react": "^0.487.0",
     "next": "15.2.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tailwind-scrollbar-hide": "^2.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

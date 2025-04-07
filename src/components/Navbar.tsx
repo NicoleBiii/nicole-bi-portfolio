@@ -1,15 +1,20 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import MobileMenu from "./MobileMenu";
+import MobileMenu from "./MobileMenu"
+import Lottie from 'lottie-react'
+import darkModeAnimation from '../../public/animations/darkmode-toggle.json'
+import { log } from "console";
 
 const sections = ["About", "Projects", "Contact"];
 
-export default function Navbar() {
+export default function Navbar({ active }) {
   const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const lottieRef = useRef<any>(null)
 
   useEffect(() => {
     if (darkMode) {
@@ -35,8 +40,17 @@ export default function Navbar() {
     }
   };
 
+  const handleDarkModeToggle = () => {
+    if (darkMode) {
+      lottieRef.current?.playSegments([0, 77], true)
+    } else {
+      lottieRef.current?.playSegments([77, 154], true)
+    }
+    setDarkMode(prev => !prev)
+  }
+
   return (
-    <header className="fixed top-0 w-full z-50">
+    <header className="fixed top-0 w-full z-50  no-scrollbar">
       <MobileMenu
         isOpen={menuOpen}
         toggle={() => setMenuOpen((prev) => !prev)}
@@ -45,36 +59,58 @@ export default function Navbar() {
         toggleDarkMode={() => setDarkMode((prev) => !prev)}
       />
 
-      <nav className="flex items-center justify-between h-12 z-50 md:h-18 backdrop-blur-md bg-white/30 dark:bg-black/30 shadow-md px-4 md:px-8">
+      <nav className="flex items-center justify-between h-12 z-50 md:h-16 backdrop-blur-md px-4 md:px-8">
         {/* Logo */}
-        <button onClick={() => handleScrollTo("home")}>
+        <button onClick={() => handleScrollTo("home")} className="relative w-[60px] h-[50px] md:w-[100px] md:h-[80px]">
           <Image
             src={darkMode ? "/icons/N-dark.svg" : "/icons/N.svg"}
             alt="Home"
-            width={50}
-            height={36}
+            fill
             className="cursor-pointer"
           />
         </button>
+
         <div className="hidden md:flex items-center gap-6">
-          {sections.map((section) => (
+          {sections.map((section) => {
+            const sectionId = section.toLowerCase();
+            return(
             <button
               key={section}
-              onClick={() => handleNavClick(section)}
-              className="text-sm md:text-base font-medium text-gray-800 dark:text-gray-100 hover:underline">
+              onClick={() => handleNavClick(sectionId)}
+              className={`text-base font-medium transition-all duration-300
+                ${active === sectionId ? 
+                    'border-b-2 border-b border-gray-800 dark:border-b-gray-100 font-bold' :
+                    'border-b-2 border-transparent'
+                } 
+                text-gray-800 dark:text-gray-100
+                hover:scale-105 hover:-translate-y-[1px]
+                hover:border-b-red-300 dark:hover:border-b-red-500`}
+                >
               {section}
             </button>
-          ))}
-          <button
-            onClick={() => setDarkMode((prev) => !prev)}
-            className="w-6 h-6 relative"
-            title="Toggle Dark Mode">
-            {darkMode ? "🌙" : "☀️"}
-          </button>
+          )})}
+            <button
+            onClick={handleDarkModeToggle}
+            title="Toggle Dark Mode"
+            >
+            <Lottie
+                lottieRef={lottieRef}
+                animationData={darkModeAnimation}
+                loop={false}
+                autoplay={false}
+                style={{ width: 30, height: 30 }}
+                speed={0.4}
+                rendererSettings={{
+                  preserveAspectRatio: "xMidYMid slice",
+                }}
+                
+            />
+            </button>
         </div>
 
         {/* Mobile menu icon */}
         <button
+          id="menu-toggle"
           onClick={() => setMenuOpen((prev) => !prev)}
           className="md:hidden text-2xl text-gray-800 dark:text-white">
           {menuOpen ? "✕" : "☰"}

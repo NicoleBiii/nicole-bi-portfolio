@@ -3,9 +3,8 @@
 import { useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Sun, Moon } from 'lucide-react'
-import { DotLottieReact } from '@lottiefiles/dotlottie-react'
+import { useDarkMode } from "@/context/DarkModeContext";
 
-import Link from 'next/link'
 
 interface MobileMenuProps {
   isOpen: boolean
@@ -37,10 +36,9 @@ export default function MobileMenu({
   isOpen,
   toggle,
   sections,
-  darkMode,
-  toggleDarkMode,
 }: MobileMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null)
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
   // Close when clicking outside
   useEffect(() => {

@@ -12,8 +12,10 @@ const DarkModeContext = createContext<DarkModeContextType | undefined>(undefined
 //load from local storage
 export const DarkModeProvider = ({ children }: { children: React.ReactNode }) => {
   const [darkMode, setDarkMode] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
     const saved = localStorage.getItem("theme");
     const isDark = saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches);
     setDarkMode(isDark);
@@ -29,6 +31,8 @@ export const DarkModeProvider = ({ children }: { children: React.ReactNode }) =>
       return newMode;
     });
   };
+
+  if (!isClient) return null;
 
   return (
     <DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>

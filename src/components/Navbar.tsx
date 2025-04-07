@@ -124,7 +124,7 @@ export default function Navbar({ active }: NavbarProps) {
                 } 
                 text-gray-800 dark:text-gray-100
                 hover:scale-105 hover:-translate-y-[1px]
-                hover:border-b-red-300 dark:hover:border-b-red-500`}
+                hover:border-b-gray-800 dark:hover:border-b-gray-100`}
                 >
               {section}
             </motion.button>

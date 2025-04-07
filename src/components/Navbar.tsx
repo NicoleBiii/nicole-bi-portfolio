@@ -4,13 +4,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import MobileMenu from "./MobileMenu"
-import Lottie from 'lottie-react'
+import dynamic from "next/dynamic";
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 import darkModeAnimation from '../../public/animations/darkmode-toggle.json'
 import { log } from "console";
 
 const sections = ["About", "Projects", "Contact"];
 
-export default function Navbar({ active }) {
+interface NavbarProps {
+  active: string
+}
+
+export default function Navbar({ active }: NavbarProps) {
   const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -48,6 +53,10 @@ export default function Navbar({ active }) {
     }
     setDarkMode(prev => !prev)
   }
+
+  useEffect(() => {
+    lottieRef.current?.setSpeed(0.4);
+  }, []);
 
   return (
     <header className="fixed top-0 w-full z-50  no-scrollbar">
@@ -99,7 +108,6 @@ export default function Navbar({ active }) {
                 loop={false}
                 autoplay={false}
                 style={{ width: 30, height: 30 }}
-                speed={0.4}
                 rendererSettings={{
                   preserveAspectRatio: "xMidYMid slice",
                 }}

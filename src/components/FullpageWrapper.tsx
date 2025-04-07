@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useMemo } from "react"
 import Navbar from "./Navbar"
 
 const sections = ["home", "about", "projects", "contact"]
@@ -8,68 +8,81 @@ const sections = ["home", "about", "projects", "contact"]
 export default function FullpageWrapper() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState("home");
-  const [scrolling, setScrolling] = useState(false);
+  const scrollLockRef = useRef<boolean>(false)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  const currentIndex = useMemo(() => sections.indexOf(active), [active])
 
   // scroll to
-  const scrollTo = (id:string) => {
+  const scrollTo = (id: string) => {
     const el = document.getElementById(id)
-    if (el) {
-        setScrolling(true)
-        el.scrollIntoView({ behavior: "smooth"})
-        setTimeout(() => setScrolling(false), 1000)
-    }
+    if (!el || scrollLockRef.current) return
+
+    scrollLockRef.current = true
+    el.scrollIntoView({ behavior: "smooth" })
+
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    timeoutRef.current = setTimeout(() => {
+      scrollLockRef.current = false
+    }, 1000)
   }
 
-  // scrolling listening
   useEffect(() => {
-    const handelWheel = (e:WheelEvent) => {
-        if (scrolling) return
-        const index = sections.indexOf(active)
-        if(e.deltaY > 0 && index < sections.length - 1) {
-            scrollTo(sections[index + 1])
-        } else if (e.deltaY < 0 && index > 0 ) {
-            scrollTo(sections[index - 1])
-        }
-    }
-    window.addEventListener('wheel', handelWheel, { passive:false })
-    return () => window.removeEventListener('wheel', handelWheel)
-  }, [active, scrolling]);
+    const handleWheel = (e: WheelEvent) => {
+      if (scrollLockRef.current) return
 
-  // keyboard support
+      if (e.deltaY > 0 && currentIndex < sections.length - 1) {
+        scrollTo(sections[currentIndex + 1])
+      } else if (e.deltaY < 0 && currentIndex > 0) {
+        scrollTo(sections[currentIndex - 1])
+      }
+    }
+
+    window.addEventListener("wheel", handleWheel)
+    return () => window.removeEventListener("wheel", handleWheel)
+  }, [currentIndex])
+
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-        if(scrolling) return
-        const index = sections.indexOf(active)
-        if((e.key === 'ArrowDown' || e.key === 'PageDown') && index < sections.length - 1) {
-            scrollTo(sections[index + 1])
-        } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && index > 0) {
-            scrollTo(sections[index - 1])
-        }
-    }
-    window.addEventListener('keydown', handleKey)
-    return () => window.removeEventListener('keydown', handleKey)
-  },[active, scrolling])
+      if (scrollLockRef.current) return
 
-  // listen to current section
+      if ((e.key === "ArrowDown" || e.key === "PageDown") && currentIndex < sections.length - 1) {
+        scrollTo(sections[currentIndex + 1])
+      } else if ((e.key === "ArrowUp" || e.key === "PageUp") && currentIndex > 0) {
+        scrollTo(sections[currentIndex - 1])
+      }
+    }
+
+    window.addEventListener("keydown", handleKey)
+    return () => window.removeEventListener("keydown", handleKey)
+  }, [currentIndex])
+
   useEffect(() => {
     const observer = new IntersectionObserver(
-        entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setActive(entry.target.id)
-                }
-            })
-        },
-        { threshold: 0.6}
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.target.id !== active) {
+            setActive(entry.target.id)
+          }
+        })
+      },
+      { threshold: 0.6 }
     )
 
-    sections.forEach(id => {
-        const el = document.getElementById(id)
-        if (el) observer.observe(el)
+    sections.forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
     })
 
     return () => observer.disconnect()
+  }, [active])
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
   }, [])
+
 
   return (
     <div ref={containerRef} className="relative h-screen">
@@ -88,7 +101,7 @@ export default function FullpageWrapper() {
       </div>
 
       {/* Scroll container */}
-      <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth overflow-y-auto no-scrollbar">
+      <div className="h-screen snap-y snap-mandatory scroll-smooth overflow-y-auto no-scrollbar">
         <section
           id="home"
           className="h-screen w-full flex flex-col justify-center bg-black text-white snap-start">

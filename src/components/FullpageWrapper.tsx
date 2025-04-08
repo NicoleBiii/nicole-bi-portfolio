@@ -2,7 +2,13 @@
 
 import { useEffect, useState, useRef, useMemo } from "react"
 import Navbar from "./Navbar"
+import HomeSection from "@/components/sections/HomeSection";
+import AboutSection from "@/components/sections/AboutSection";
+import SkillsSection from "@/components/sections/SkillsSection";
+import ProjectsSection from "@/components/sections/ProjectsSection";
+import ContactSection from "@/components/sections/ContactSection";
 import DynamicBackground from "./DynamicBackground";
+import { motion } from "framer-motion";
 import { useDarkMode } from "@/context/DarkModeContext";
 
 const sections = ["home", "about", "skills", "projects", "contact"]
@@ -104,37 +110,12 @@ export default function FullpageWrapper() {
 
       {/* Scroll container */}
       <div className="h-screen snap-y snap-mandatory scroll-smooth overflow-y-auto no-scrollbar">
-        <section
-          id="home"
-          className="h-screen w-full flex flex-col justify-center text-white snap-start">
-            <DynamicBackground />
-          <h1 className="text-5xl md:text-7xl  opacity-0 animate-fade-slide-in">Nicole Bi</h1>
-          <p className="mt-4 text-xl text-gray-400 opacity-0 animate-fade-slide-in delay-500">Fullstack developer</p>
-        </section>
-
-        <section
-          id="about"
-          className="h-screen w-full flex justify-center items-center bg-gray-900 text-white snap-start">
-          About Me Section
-        </section>
-
-        <section
-          id="skills"
-          className="h-screen w-full flex justify-center items-center bg-gray-500 text-white snap-start">
-          Tech Stack Section
-        </section>
-
-        <section
-          id="projects"
-          className="h-screen w-full flex justify-center items-center bg-white text-black snap-start">
-          Project Gallery Section
-        </section>
-
-        <section
-          id="contact"
-          className="h-screen w-full flex justify-center items-center bg-zinc-800 text-white snap-start">
-          Contact Me Section
-        </section>
+        <DynamicBackground />
+        <HomeSection />
+        <AboutSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <ContactSection />
       </div>
     </div>
   );

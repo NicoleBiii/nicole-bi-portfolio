@@ -22,7 +22,7 @@ const navContainer = {
 };
 
 const navItem = {
-  hidden: { opacity: 0, y: -20 },
+  hidden: { opacity: 0, y: -60 },
   show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 };
 
@@ -34,6 +34,10 @@ export default function Navbar({ active }: NavbarProps) {
   const { darkMode, toggleDarkMode } = useDarkMode();
   const [menuOpen, setMenuOpen] = useState(false);
   const [lottieLoaded, setLottieLoaded] = useState(false);
+  const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
+  const [hovered, setHovered] = useState<string | null>(null);
+  const navRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
 
   const lottieRef = useRef<any>(null)
 
@@ -45,6 +49,27 @@ export default function Navbar({ active }: NavbarProps) {
     }
   }, [darkMode]);
 
+  useEffect(() => {
+    const target = hovered || active;
+  
+    if (!sections.map(s => s.toLowerCase()).includes(target)) {
+      setUnderlineStyle({ left: 0, width: 0 });
+      return;
+    }
+  
+    const el = navRefs.current[target];
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      const containerRect = el.parentElement?.getBoundingClientRect();
+      if (containerRect) {
+        setUnderlineStyle({
+          left: rect.left - containerRect.left,
+          width: rect.width,
+        });
+      }
+    }
+  }, [hovered, active]);
+  
   const handleNavClick = (id: string) => {
     const el = document.getElementById(id.toLowerCase());
     if (el) {
@@ -63,9 +88,9 @@ export default function Navbar({ active }: NavbarProps) {
 
   const handleDarkModeToggle = () => {
     if (darkMode) {
-      lottieRef.current?.playSegments([0, 77], true)
-    } else {
       lottieRef.current?.playSegments([77, 154], true)
+    } else {
+      lottieRef.current?.playSegments([0, 77], true)
     }
     toggleDarkMode()
   }
@@ -86,13 +111,17 @@ export default function Navbar({ active }: NavbarProps) {
 
       <motion.nav 
         variants={navContainer}
-        initial="hidden"
-        animate="show"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className="flex items-center justify-between h-12 z-50 md:h-16 backdrop-blur-md px-4 md:px-8"
       >
         {/* Logo */}
         <motion.button 
           variants={navItem}
+          initial="hidden"
+          animate="show"
+          transition={{ delay: 0.2 }}
           onClick={() => handleScrollTo("home")} 
           className="relative w-[60px] h-[50px] md:w-[100px] md:h-[80px]"
           >
@@ -108,27 +137,36 @@ export default function Navbar({ active }: NavbarProps) {
 
         <motion.div 
           variants={navContainer}
-          className="hidden md:flex items-center gap-6"
+          initial="hidden"
+          animate="show"
+          className="relative hidden md:flex items-center gap-6"
         >
           {sections.map((section) => {
             const sectionId = section.toLowerCase();
             return(
             <motion.button
               key={section}
+              ref={(el) => void (navRefs.current[sectionId] = el)}
               variants={navItem}
               onClick={() => handleNavClick(sectionId)}
-              className={`text-base font-medium transition-all duration-300
-                ${active === sectionId ? 
-                    'border-b-2 border-b border-gray-400 dark:border-b-gray-100 font-bold' :
-                    'border-b-2 border-transparent'
-                } 
+              onMouseEnter={() => setHovered(sectionId)}
+              onMouseLeave={() => setHovered(null)}
+              className="text-base font-medium transition-all duration-300
                 text-gray-400 dark:text-gray-100
-                hover:scale-105 hover:-translate-y-[1px]
-                hover:border-b-gray-400 dark:hover:border-b-gray-100`}
+                hover:scale-105 hover:-translate-y-[1px]"
                 >
               {section}
             </motion.button>
           )})}
+
+            <motion.div
+                layout
+                className="absolute bottom-0 h-0.5 bg-gray-400/60 dark:bg-gray-100/60 rounded-full shadow-md"
+                animate={underlineStyle}
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                style={{ left: underlineStyle.left, width: underlineStyle.width }}
+              />
+          
             <motion.button
               variants={navItem}
               onClick={handleDarkModeToggle}

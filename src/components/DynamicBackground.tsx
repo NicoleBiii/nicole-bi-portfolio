@@ -18,28 +18,39 @@ function DynamicBackground() {
     const container = document.getElementById(uniqueId);
     if (!container) return;
 
-    try {
-      if (bgInstance.current && bgInstance.current.destroy) {
-        bgInstance.current.destroy();
+    const safeDestroy = () => {
+      if (
+        bgInstance.current &&
+        typeof bgInstance.current.destroy === "function"
+      ) {
+        try {
+          const canvas = container.querySelector("canvas");
+          if (canvas && canvas.parentNode === container) {
+            bgInstance.current.destroy();
+          } else {
+            if (process.env.NODE_ENV === "development") {
+              console.warn("Canvas already removed or reparented.");
+            }
+          }
+        } catch (err) {
+          if (process.env.NODE_ENV === "development") {
+          console.warn("Safe destroy failed:", err);
+          }
+        }
       }
-    } catch (err) {
-      console.warn("BlurGradientBg destroy error:", err);
-    }
-
+    };
+  
+    safeDestroy();
+  
     bgInstance.current = new BlurGradientBg({
       dom: uniqueId,
       colors: darkMode ? darkColors : lightColors,
       loop: true,
     });
-
-    return () => {
-      try {
-        bgInstance.current?.destroy();
-      } catch (err) {
-        console.warn("BlurGradientBg unmount destroy error:", err);
-      }
-    };
+  
+    return () => safeDestroy();
   }, [darkMode]);
+  
 
   return <div id={uniqueId} ref={bgRef} className="absolute inset-0 -z-10" />;
 }

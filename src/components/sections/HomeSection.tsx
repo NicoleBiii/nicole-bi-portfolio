@@ -21,12 +21,14 @@ export default function HomeSection() {
   className="text-5xl md:text-7xl font-bold mb-4 flex gap-1"
   animate={{ y: [0, -6, 0] }}
   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+  viewport={{ once: true }}
 >
   {[...title].map((char, i) => (
     <motion.span
       key={i}
       initial={{ y: 40, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
       transition={{
         delay: i * 0.08,
         type: "spring",
@@ -40,7 +42,12 @@ export default function HomeSection() {
         transition: { duration: 0.3 },
       }}
     >
-      <span className="relative z-10">{char}</span>
+      <span 
+        className="relative z-10"
+        style={{ willChange: "transform, opacity" }}
+      >
+        {char}
+      </span>
       <motion.span
         className="absolute inset-0 bg-white/10 blur-md"
         initial={{ x: "-120%" }}
@@ -58,8 +65,9 @@ export default function HomeSection() {
 
 
     <motion.p
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
         transition={{ delay: 0.8 }}
         className="mt-4 text-xl text-gray-400 text-center md:text-left max-w-xs md:max-w-full"
       >
@@ -67,9 +75,15 @@ export default function HomeSection() {
     </motion.p>
 
     <motion.p
-      initial={{ opacity: 0 }}
-      animate={{ opacity: [0, 1, 0.7, 1] }}
-      transition={{ delay: 1.2, duration: 3, repeat: Infinity }}
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+      transition={{
+        delay: 1.2,
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
       className="text-sm mt-4 italic text-white/60 tracking-wide"
     >
       Designing seamless digital experiences.

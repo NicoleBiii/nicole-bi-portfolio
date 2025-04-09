@@ -7,9 +7,10 @@ import AboutSection from "@/components/sections/AboutSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import ContactSection from "@/components/sections/ContactSection";
-import DynamicBackground from "./DynamicBackground";
-import { motion } from "framer-motion";
-import { useDarkMode } from "@/context/DarkModeContext";
+import dynamic from "next/dynamic";
+const DynamicBackground = dynamic(() => import("./DynamicBackground"), {
+  ssr: false,
+});
 
 const sections = ["home", "about", "skills", "projects", "contact"]
 
@@ -18,6 +19,7 @@ export default function FullpageWrapper() {
   const [active, setActive] = useState("home");
   const scrollLockRef = useRef<boolean>(false)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const activeRef = useRef(active);
 
   const currentIndex = useMemo(() => sections.indexOf(active), [active])
 
@@ -38,59 +40,68 @@ export default function FullpageWrapper() {
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       if (scrollLockRef.current) return;
-  
-      const index = sections.indexOf(active);
+      const index = sections.indexOf(activeRef.current);
       if (e.deltaY > 0 && index < sections.length - 1) {
         scrollTo(sections[index + 1]);
       } else if (e.deltaY < 0 && index > 0) {
         scrollTo(sections[index - 1]);
       }
     };
-  
     window.addEventListener("wheel", handleWheel);
     return () => window.removeEventListener("wheel", handleWheel);
-  }, [active]);
+  }, []);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (scrollLockRef.current) return
-
-      if ((e.key === "ArrowDown" || e.key === "PageDown") && currentIndex < sections.length - 1) {
-        scrollTo(sections[currentIndex + 1])
-      } else if ((e.key === "ArrowUp" || e.key === "PageUp") && currentIndex > 0) {
-        scrollTo(sections[currentIndex - 1])
+      const index = sections.indexOf(activeRef.current);
+      if ((e.key === "ArrowDown" || e.key === "PageDown") && index < sections.length - 1) {
+        scrollTo(sections[index + 1])
+      } else if ((e.key === "ArrowUp" || e.key === "PageUp") && index > 0) {
+        scrollTo(sections[index - 1])
       }
     }
 
     window.addEventListener("keydown", handleKey)
     return () => window.removeEventListener("keydown", handleKey)
-  }, [currentIndex])
+  }, [])
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.6 }
-    );
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
+    }, { threshold: 0.6 });
   
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+    const timer = setTimeout(() => {
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    }, 50);
   
-    return () => observer.disconnect();
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
 
   useEffect(() => {
+    const unlockScroll = () => {
+      scrollLockRef.current = false;
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+    };
+  
+    window.addEventListener("scrollend", unlockScroll);
     return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    }
-  }, [])
+      window.removeEventListener("scrollend", unlockScroll);
+    };
+  }, []);
 
 
   return (

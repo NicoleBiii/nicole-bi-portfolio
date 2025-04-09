@@ -32,6 +32,10 @@ export default function FullpageWrapper() {
 
   const currentIndex = useMemo(() => sections.indexOf(active), [active])
 
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
+  
   // scroll to
   const scrollTo = (id: string) => {
     const el = document.getElementById(id)
@@ -39,6 +43,9 @@ export default function FullpageWrapper() {
 
     scrollLockRef.current = true
     el.scrollIntoView({ behavior: "smooth" })
+
+    setActive(id);
+    activeRef.current = id;
 
     if (timeoutRef.current) clearTimeout(timeoutRef.current)
     timeoutRef.current = setTimeout(() => {
@@ -82,11 +89,15 @@ export default function FullpageWrapper() {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActive(entry.target.id);
-        }
+        if (entry.isIntersecting && !scrollLockRef.current) {
+          const id = entry.target.id;
+          if (id !== activeRef.current) {
+            setActive(id);
+            activeRef.current = id;
+          }
+        }        
       });
-    }, { threshold: 0.6 });
+    }, { threshold: [0.75, 0.9], rootMargin: "0px 0px -20% 0px" });
   
     const timer = setTimeout(() => {
       sections.forEach((id) => {

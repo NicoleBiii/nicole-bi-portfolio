@@ -34,7 +34,7 @@ export default function AboutSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="w-full max-w-[600px] bg-white/5 backdrop-blur-md rounded-2xl px-6 py-8 text-center sm:text-left text-base sm:text-lg leading-relaxed sm:leading-loose shadow-xl"
+          className="w-full max-w-[600px] rounded-2xl px-6 py-8 text-center sm:text-left text-base sm:text-lg leading-relaxed sm:leading-loose"
         >
           <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mb-4 text-balance">
             Hi! I'm Nicole Bi

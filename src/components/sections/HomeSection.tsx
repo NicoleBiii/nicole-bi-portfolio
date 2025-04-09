@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope, FaFileAlt } from "react-icons/fa";
+import MagneticIcon from "../MagneticIcon";
 
 const title = "Nicole Bi";
 
@@ -76,26 +77,34 @@ export default function HomeSection() {
 
 
     <div className="absolute bottom-12 flex gap-6 items-center justify-center">
-        <a href="https://github.com/NicoleBiii" target="_blank" rel="noopener noreferrer" title="GitHub">
-          <FaGithub className="text-2xl hover:scale-110 transition-transform duration-300" />
-        </a>
-        <a href="https://linkedin.com/in/nicole-bi" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-          <FaLinkedin className="text-2xl hover:scale-110 transition-transform duration-300" />
-        </a>
-        <a href="xinyuebi23@email.com" title="Send me an email">
-          <FaEnvelope className="text-2xl hover:scale-110 transition-transform duration-300" />
-        </a>
-        <a
-          href="/NicoleBi-resume.pdf"
-          download
-          title="Download my resume"
-          className="relative group"
-        >
-          <FaFileAlt className="text-2xl hover:scale-110 transition-transform duration-300" />
-          <span className="absolute bottom-full mb-2 text-xs text-white bg-black px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Download Resume
-          </span>
-        </a>
+        <MagneticIcon>
+          <a href="https://github.com/NicoleBiii" target="_blank" rel="noopener noreferrer" title="GitHub">
+            <FaGithub className="text-2xl hover:scale-110 transition-transform duration-300" />
+          </a>
+        </MagneticIcon>
+        <MagneticIcon>
+          <a href="https://linkedin.com/in/nicole-bi" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+            <FaLinkedin className="text-2xl hover:scale-110 transition-transform duration-300" />
+          </a>
+        </MagneticIcon>
+        <MagneticIcon>
+          <a href="xinyuebi23@email.com" title="Send me an email">
+            <FaEnvelope className="text-2xl hover:scale-110 transition-transform duration-300" />
+          </a>
+        </MagneticIcon>
+        <MagneticIcon>
+          <a
+            href="/NicoleBi-resume.pdf"
+            download
+            title="Download my resume"
+            className="relative group"
+            >
+            <FaFileAlt className="text-2xl hover:scale-110 transition-transform duration-300" />
+            <span className="absolute bottom-full mb-2 text-xs text-white bg-black px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              Download Resume
+            </span>
+          </a>
+        </MagneticIcon>
       </div>
     </motion.section>
   );

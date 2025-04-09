@@ -108,3 +108,17 @@ h1, h2, h3 {
 .rotate-y-180 {
   transform: rotateY(180deg);
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.3);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 100, 100, 0.5);
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}

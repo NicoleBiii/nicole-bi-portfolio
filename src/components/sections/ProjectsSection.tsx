@@ -3,10 +3,11 @@
 import { useState, useEffect } from "react";
 import { projects } from "../projectData";
 import ProjectCard from "../ProjectCard";
-
+import ProjectModal from "./ProjectModal";
 
 export default function ProjectsSection() {
   const [current, setCurrent] = useState(0);
+  const [selectedProject, setSelectedProject] = useState<null | (typeof projects)[0]>(null);
 
   // responsive card width
   const [cardWidthPercent, setCardWidthPercent] = useState(80);
@@ -27,13 +28,13 @@ export default function ProjectsSection() {
       id="projects"
       className="h-screen w-full flex flex-col justify-center items-center snap-start relative overflow-hidden"
     >
-      {/* card container */}
+      {/* Card container */}
       <div className="relative w-full h-[70vh]" style={{ transformStyle: "preserve-3d" }}>
         {projects.map((project, index) => {
           const offset = index - current;
           const isActive = offset === 0;
-          const rotationY = offset === 0 ? 0 : offset * -15; 
-          const translateX = offset * 100; 
+          const rotationY = offset === 0 ? 0 : offset * -15;
+          const translateX = offset * 100;
           const scale = isActive ? 1 : 0.9;
           const opacity = Math.abs(offset) > 1 ? 0 : isActive ? 1 : 0.5;
           const zIndex = 10 - Math.abs(offset);
@@ -55,14 +56,24 @@ export default function ProjectsSection() {
                 zIndex,
                 pointerEvents: isActive ? "auto" : "none",
               }}
+              onClick={() => isActive && setSelectedProject(project)} // 👈 点击激活卡片弹出 modal
             >
-              <ProjectCard project={project} />
+              <ProjectCard project={project} active={isActive} />
             </div>
           );
         })}
       </div>
 
-      {/* controle button*/}
+      {/* Modal 控制 */}
+      {selectedProject && (
+        <ProjectModal
+          isOpen={!!selectedProject}
+          onClose={() => setSelectedProject(null)}
+          project={selectedProject}
+        />
+      )}
+
+      {/* 控制按钮 */}
       <div className="flex gap-6 mt-8 z-30">
         <button
           onClick={() => setCurrent((prev) => Math.max(0, prev - 1))}

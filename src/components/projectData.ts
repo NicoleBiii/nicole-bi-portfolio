@@ -7,6 +7,12 @@ export const projects = [
       image: "/images/tablemate.png",
       github: "https://github.com/NicoleBiii/Table-Mate",
       Demo: "https://tablemate-demo.vercel.app",
+      responsibilities: [
+        "Fully designed and developed from scratch as a solo project",
+        "Implemented QR-based ordering system with seamless scan → order → pay flow",
+        "Built RESTful API and session-based ordering logic with integrated payment feature",
+      ],
+      videoUrl: "/videos/tablemate.MOV",
     },
     {
       title: "AI News",
@@ -15,6 +21,11 @@ export const projects = [
       techStack: ["React", "JavaScript", "REST APIs", "Google Gemini"],
       image: "/images/simplenews.png",
       github: "https://github.com/NicoleBiii/simple-news",
+      responsibilities: [
+        "Led development of frontend and backend using React and Node.js",
+        "Integrated Google Gemini API to auto-generate AI-powered discussion topics",
+      ],
+      videoUrl: "/videos/simplenews.mp4",
     },
     {
       title: "True North",
@@ -23,14 +34,26 @@ export const projects = [
       techStack: ["React", "JavaScript", "MySQL", "Google Gemini"],
       image: "/images/truenorth.png",
       Demo: "https://instock-demo.vercel.app",
+      responsibilities: [
+        "Developed core frontend features using React and custom UI components",
+        "Handled API integration and logic for brand validation and recommendations",
+        "Worked cross-functionally with product managers and designers during the hackathon",
+      ],
+      videoUrl: "/videos/truenorth.mp4",
     },
     {
       title: "Instock",
       description: "Inventory management app built by 4-person team. I handled fuzzy search, attribute sorting, responsive UI and modals.",
-      tags: ["Team Project", "Responsive", "Backend Logic"],
+      tags: ["Agile", "Jira", "Responsive", "Backend Logic"],
       techStack: ["React", "JavaScript", "MySQL", "Node.js", "Express.js"],
       image: "/images/instock.png",
       github: "https://github.com/olivia-onuk/instock-full-stack-attack",
       Demo: "https://instock-demo.vercel.app",
+      responsibilities: [
+        "Implemented backend fuzzy search and dynamic attribute-based sorting",
+        "Built responsive UI components and interactive modals",
+        "Worked in an Agile team using Jira and GitHub GitFlow; earned 98.6% project score for code quality and teamwork",
+      ],
+      videoUrl: "/videos/instock.mp4",
     },
   ];

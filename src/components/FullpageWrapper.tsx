@@ -37,18 +37,19 @@ export default function FullpageWrapper() {
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      if (scrollLockRef.current) return
-
-      if (e.deltaY > 0 && currentIndex < sections.length - 1) {
-        scrollTo(sections[currentIndex + 1])
-      } else if (e.deltaY < 0 && currentIndex > 0) {
-        scrollTo(sections[currentIndex - 1])
+      if (scrollLockRef.current) return;
+  
+      const index = sections.indexOf(active);
+      if (e.deltaY > 0 && index < sections.length - 1) {
+        scrollTo(sections[index + 1]);
+      } else if (e.deltaY < 0 && index > 0) {
+        scrollTo(sections[index - 1]);
       }
-    }
-
-    window.addEventListener("wheel", handleWheel)
-    return () => window.removeEventListener("wheel", handleWheel)
-  }, [currentIndex])
+    };
+  
+    window.addEventListener("wheel", handleWheel);
+    return () => window.removeEventListener("wheel", handleWheel);
+  }, [active]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -69,21 +70,21 @@ export default function FullpageWrapper() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.target.id !== active) {
-            setActive(entry.target.id)
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
           }
-        })
+        });
       },
       { threshold: 0.6 }
-    )
-
+    );
+  
     sections.forEach((id) => {
-      const el = document.getElementById(id)
-      if (el) observer.observe(el)
-    })
-
-    return () => observer.disconnect()
-  }, [active])
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+  
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     return () => {

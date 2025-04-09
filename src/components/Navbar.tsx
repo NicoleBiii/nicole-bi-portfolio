@@ -87,12 +87,10 @@ export default function Navbar({ active }: NavbarProps) {
   };
 
   const handleDarkModeToggle = () => {
-    if (darkMode) {
-      lottieRef.current?.playSegments([77, 154], true)
-    } else {
-      lottieRef.current?.playSegments([0, 77], true)
-    }
-    toggleDarkMode()
+    if (!lottieRef.current) return;
+  
+    lottieRef.current.playSegments(darkMode ? [77, 154] : [0, 77], true);
+    toggleDarkMode();
   }
 
   useEffect(() => {

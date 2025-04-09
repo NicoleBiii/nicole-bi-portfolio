@@ -21,6 +21,15 @@ export default function FullpageWrapper() {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const activeRef = useRef(active);
 
+  const debounce = (fn: (...args: any[]) => void, delay = 300) => {
+    let timer: NodeJS.Timeout;
+    return (...args: any[]) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn(...args), delay);
+    };
+  };
+  
+
   const currentIndex = useMemo(() => sections.indexOf(active), [active])
 
   // scroll to
@@ -38,27 +47,31 @@ export default function FullpageWrapper() {
   }
 
   useEffect(() => {
+    const debouncedScrollTo = debounce((id: string) => scrollTo(id), 100);
+
     const handleWheel = (e: WheelEvent) => {
       if (scrollLockRef.current) return;
       const index = sections.indexOf(activeRef.current);
       if (e.deltaY > 0 && index < sections.length - 1) {
-        scrollTo(sections[index + 1]);
+        debouncedScrollTo(sections[index + 1]);
       } else if (e.deltaY < 0 && index > 0) {
-        scrollTo(sections[index - 1]);
+        debouncedScrollTo(sections[index - 1]);
       }
     };
-    window.addEventListener("wheel", handleWheel);
+    window.addEventListener("wheel", handleWheel, { passive: true });
     return () => window.removeEventListener("wheel", handleWheel);
   }, []);
 
   useEffect(() => {
+    const debouncedScrollTo = debounce((id: string) => scrollTo(id), 100);
+
     const handleKey = (e: KeyboardEvent) => {
       if (scrollLockRef.current) return
       const index = sections.indexOf(activeRef.current);
       if ((e.key === "ArrowDown" || e.key === "PageDown") && index < sections.length - 1) {
-        scrollTo(sections[index + 1])
+        debouncedScrollTo(sections[index + 1]);
       } else if ((e.key === "ArrowUp" || e.key === "PageUp") && index > 0) {
-        scrollTo(sections[index - 1])
+        debouncedScrollTo(sections[index - 1])
       }
     }
 

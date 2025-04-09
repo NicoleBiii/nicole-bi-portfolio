@@ -9,7 +9,7 @@ export default function AboutSection() {
       id="about"
       className="min-h-screen w-full flex justify-center items-center px-6 sm:px-8 md:px-16 py-12 text-white snap-start"
     >
-      <div className="max-w-6xl w-full flex flex-col sm:flex-row items-center sm:items-start gap-8 sm:gap-14">
+      <div className="max-w-6xl w-full flex flex-col sm:flex-row items-center justify-around gap-8 sm:gap-14">
         {/* Left: Profile Image - hidden on mobile */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -34,7 +34,7 @@ export default function AboutSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="w-full max-w-[600px] text-center sm:text-left text-base sm:text-lg leading-relaxed sm:leading-loose"
+          className="w-full max-w-[600px] bg-white/5 backdrop-blur-md rounded-2xl px-6 py-8 text-center sm:text-left text-base sm:text-lg leading-relaxed sm:leading-loose shadow-xl"
         >
           <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mb-4 text-balance">
             Hi! I'm Nicole Bi

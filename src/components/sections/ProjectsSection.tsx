@@ -1,16 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { projects } from "../projectData";
 import ProjectCard from "../ProjectCard";
 import ProjectModal from "../ProjectModal";
 
 import { motion } from "framer-motion";
 
-
 export default function ProjectsSection() {
   const [current, setCurrent] = useState(0);
-  const [selectedProject, setSelectedProject] = useState<null | (typeof projects)[0]>(null);
+  const [selectedProject, setSelectedProject] = useState<
+    null | (typeof projects)[0]
+  >(null);
+
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
 
   // responsive card width
   const [cardWidthPercent, setCardWidthPercent] = useState(80);
@@ -26,19 +30,41 @@ export default function ProjectsSection() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+    if (touchStartX.current === null || touchEndX.current === null) return;
+
+    const distance = touchEndX.current - touchStartX.current;
+
+    if (distance > 50 && current > 0) {
+      setCurrent(current - 1);
+    } else if (distance < -50 && current < projects.length - 1) {
+      setCurrent(current + 1);
+    }
+
+    // reset
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   return (
     <section
       id="projects"
-      className="h-screen w-full flex flex-col justify-center items-center snap-start relative overflow-hidden"
-    >
+      className="h-screen w-full flex flex-col justify-center items-center snap-start relative overflow-hidden">
       {/* Card container */}
-      <motion.div 
-        className="relative w-full h-[70vh]" 
+      <motion.div
+        className="relative w-full h-[70vh]"
         style={{ transformStyle: "preserve-3d" }}
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         viewport={{ once: true }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         {projects.map((project, index) => {
           const offset = index - current;
@@ -70,14 +96,15 @@ export default function ProjectsSection() {
                 if (isActive) {
                   setSelectedProject(project);
                 } else {
-                  const index = projects.findIndex((p) => p.title === project.title);
+                  const index = projects.findIndex(
+                    (p) => p.title === project.title
+                  );
                   const direction = index > current ? 1 : -1;
                   setCurrent((prev) =>
                     Math.max(0, Math.min(projects.length - 1, prev + direction))
                   );
                 }
-              }}
-            >
+              }}>
               <ProjectCard project={project} active={isActive} />
             </div>
           );
@@ -94,23 +121,22 @@ export default function ProjectsSection() {
       )}
 
       {/* button */}
-      <motion.div 
+      <motion.div
         className="flex gap-6 mt-8 z-30"
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
-        viewport={{ once: true }}
-      >
+        viewport={{ once: true }}>
         <button
           onClick={() => setCurrent((prev) => Math.max(0, prev - 1))}
-          className="px-4 py-2 rounded-full dark:text-white bg-white/10 dark:bg-black/10 transition transform hover:scale-110 hover:bg-white/20 dark:hover:bg-black/20"
-        >
+          className="px-4 py-2 rounded-full dark:text-white bg-white/10 dark:bg-black/10 transition transform hover:scale-110 hover:bg-white/20 dark:hover:bg-black/20">
           ←
         </button>
         <button
-          onClick={() => setCurrent((prev) => Math.min(projects.length - 1, prev + 1))}
-          className="px-4 py-2 rounded-full dark:text-white bg-white/10 dark:bg-black/10 transition transform hover:scale-110 hover:bg-white/20 dark:hover:bg-black/20"
-        >
+          onClick={() =>
+            setCurrent((prev) => Math.min(projects.length - 1, prev + 1))
+          }
+          className="px-4 py-2 rounded-full dark:text-white bg-white/10 dark:bg-black/10 transition transform hover:scale-110 hover:bg-white/20 dark:hover:bg-black/20">
           →
         </button>
       </motion.div>

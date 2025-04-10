@@ -6,7 +6,6 @@ export const projects = [
       techStack: ["React", "JavaScript", "MongoDB", "REST APIs","Node.js", "Express.js", "Sass"],
       image: "/images/tablemate.png",
       github: "https://github.com/NicoleBiii/Table-Mate",
-      Demo: "https://tablemate-demo.vercel.app",
       responsibilities: [
         "Fully designed and developed from scratch as a solo project",
         "Implemented QR-based ordering system with seamless scan → order → pay flow",
@@ -33,7 +32,6 @@ export const projects = [
       tags: ["Team Project", "API", "Hackathon"],
       techStack: ["React", "JavaScript", "MySQL", "Google Gemini"],
       image: "/images/truenorth.png",
-      Demo: "https://instock-demo.vercel.app",
       responsibilities: [
         "Developed core frontend features using React and custom UI components",
         "Handled API integration and logic for brand validation and recommendations",
@@ -48,7 +46,6 @@ export const projects = [
       techStack: ["React", "JavaScript", "MySQL", "Node.js", "Express.js"],
       image: "/images/instock.png",
       github: "https://github.com/olivia-onuk/instock-full-stack-attack",
-      Demo: "https://instock-demo.vercel.app",
       responsibilities: [
         "Implemented backend fuzzy search and dynamic attribute-based sorting",
         "Built responsive UI components and interactive modals",

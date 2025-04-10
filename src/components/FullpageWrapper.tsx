@@ -21,13 +21,14 @@ export default function FullpageWrapper() {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const activeRef = useRef(active);
 
-  const debounce = (fn: (...args: any[]) => void, delay = 300) => {
+  const debounce = <T extends (...args: any[]) => void>(fn: T, delay = 300): T => {
     let timer: NodeJS.Timeout;
-    return (...args: any[]) => {
+    return ((...args: Parameters<T>) => {
       clearTimeout(timer);
       timer = setTimeout(() => fn(...args), delay);
-    };
+    }) as T;
   };
+  
   
 
   const currentIndex = useMemo(() => sections.indexOf(active), [active])

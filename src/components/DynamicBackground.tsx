@@ -4,10 +4,11 @@ import { useEffect, useRef, useMemo } from "react";
 import { BlurGradientBg } from "../libs/BlurGradientBg.module";
 import { useDarkMode } from "../context/DarkModeContext";
 
+
 function DynamicBackground() {
   const { darkMode } = useDarkMode();
   const bgRef = useRef<HTMLDivElement>(null);
-  const bgInstance = useRef<any>(null);
+  const bgInstance = useRef<unknown>(null);
 
   const uniqueId = useMemo(() => `blur-bg-${Math.random().toString(36).substring(2, 10)}`, []);
 
@@ -21,12 +22,12 @@ function DynamicBackground() {
     const safeDestroy = () => {
       if (
         bgInstance.current &&
-        typeof bgInstance.current.destroy === "function"
+        typeof (bgInstance.current as any)?.destroy?.() === "function"
       ) {
         try {
           const canvas = container.querySelector("canvas");
           if (canvas && canvas.parentNode === container) {
-            bgInstance.current.destroy();
+            (bgInstance.current as any)?.destroy?.();
           } else {
             if (process.env.NODE_ENV === "development") {
               console.warn("Canvas already removed or reparented.");

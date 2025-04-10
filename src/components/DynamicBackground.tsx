@@ -4,11 +4,14 @@ import { useEffect, useRef, useMemo } from "react";
 import { BlurGradientBg } from "../libs/BlurGradientBg.module";
 import { useDarkMode } from "../context/DarkModeContext";
 
+interface BlurGradientBgInstance {
+  destroy?: () => void;
+}
 
 function DynamicBackground() {
   const { darkMode } = useDarkMode();
   const bgRef = useRef<HTMLDivElement>(null);
-  const bgInstance = useRef<unknown>(null);
+  const bgInstance = useRef<BlurGradientBgInstance | null>(null);
 
   const uniqueId = useMemo(() => `blur-bg-${Math.random().toString(36).substring(2, 10)}`, []);
 
@@ -20,38 +23,27 @@ function DynamicBackground() {
     if (!container) return;
 
     const safeDestroy = () => {
-      if (
-        bgInstance.current &&
-        typeof (bgInstance.current as any)?.destroy?.() === "function"
-      ) {
-        try {
-          const canvas = container.querySelector("canvas");
-          if (canvas && canvas.parentNode === container) {
-            (bgInstance.current as any)?.destroy?.();
-          } else {
-            if (process.env.NODE_ENV === "development") {
-              console.warn("Canvas already removed or reparented.");
-            }
-          }
-        } catch (err) {
-          if (process.env.NODE_ENV === "development") {
-          console.warn("Safe destroy failed:", err);
-          }
+      try {
+        const canvas = container.querySelector("canvas");
+        if (canvas && canvas.parentNode === container) {
+          canvas.remove();
         }
+        bgInstance.current?.destroy?.();
+      } catch (err) {
+        console.warn("💥 BlurGradientBg destroy failed:", err);
       }
     };
-  
+
     safeDestroy();
-  
+
     bgInstance.current = new BlurGradientBg({
       dom: uniqueId,
       colors: darkMode ? darkColors : lightColors,
       loop: true,
     });
-  
+
     return () => safeDestroy();
   }, [darkMode]);
-  
 
   return <div id={uniqueId} ref={bgRef} className="absolute inset-0 -z-10" />;
 }

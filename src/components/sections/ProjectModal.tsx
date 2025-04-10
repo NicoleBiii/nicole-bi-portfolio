@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
+import useModalScrollLock from "../hooks/useModalScrollLock";
 
 interface ProjectModalProps {
   isOpen: boolean;
@@ -17,6 +18,9 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
+
+  useModalScrollLock(isOpen);
+
   // ESC key to close
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -47,6 +51,8 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose} // click background to close
+          onWheel={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
         >
           <motion.div
             className="relative w-full max-w-3xl bg-white dark:bg-zinc-900 rounded-xl p-6 shadow-2xl max-h-[90vh] overflow-hidden flex flex-col  border border-white/20 dark:text-white"

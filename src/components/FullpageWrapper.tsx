@@ -145,7 +145,10 @@ export default function FullpageWrapper() {
       </div>
 
       {/* Scroll container */}
-      <div className="h-screen snap-y snap-mandatory scroll-smooth overflow-y-auto no-scrollbar">
+      <div 
+        id="scroll-container"
+        className="h-screen snap-y snap-mandatory scroll-smooth overflow-y-auto no-scrollbar"
+      >
         <DynamicBackground />
         <HomeSection />
         <AboutSection />

@@ -1,0 +1,63 @@
+.
+├── README.md
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── pages
+├── postcss.config.mjs
+├── public
+│   ├── NicoleBi-resume.pdf
+│   ├── animations
+│   │   └── darkmode-toggle.json
+│   ├── fonts
+│   │   ├── Inter-Italic-VariableFont_opsz,wght.ttf
+│   │   ├── Inter-VariableFont_opsz,wght.ttf
+│   │   ├── PPNeueMontreal-Bold.otf
+│   │   ├── PPNeueMontreal-Book.otf
+│   │   ├── PPNeueMontreal-Italic.otf
+│   │   ├── PPNeueMontreal-Medium.otf
+│   │   ├── PPNeueMontreal-SemiBolditalic.otf
+│   │   └── PPNeueMontreal-Thin.otf
+│   ├── icons
+│   │   ├── N-blue.svg
+│   │   ├── N-dark.svg
+│   │   ├── N.svg
+│   │   ├── rest-api.png
+│   │   └── vscode.svg
+│   └── images
+│       ├── instock.png
+│       ├── nicole.JPG
+│       ├── simplenews.png
+│       ├── tablemate.png
+│       └── truenorth.png
+├── s.txt
+├── src
+│   ├── app
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components
+│   │   ├── DynamicBackground.tsx
+│   │   ├── FullpageWrapper.tsx
+│   │   ├── MagneticIcon.tsx
+│   │   ├── MobileMenu.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── ProjectCard.tsx
+│   │   ├── projectData.ts
+│   │   └── sections
+│   │       ├── AboutSection.tsx
+│   │       ├── ContactSection.tsx
+│   │       ├── HomeSection.tsx
+│   │       ├── ProjectsSection.tsx
+│   │       └── SkillsSection.tsx
+│   ├── context
+│   │   └── DarkModeContext.tsx
+│   └── libs
+│       └── BlurGradientBg.module.js
+├── tailwind.config.js
+└── tsconfig.json
+
+13 directories, 48 files

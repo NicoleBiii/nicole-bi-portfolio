@@ -1,0 +1,56 @@
+export const projects = [
+    {
+      title: "TableMate",
+      description: "A full-stack QR code restaurant ordering system built from scratch. Customers can scan, order, and pay seamlessly.",
+      tags: ["Full Stack", "Solo Project", "Bootcamp Capstone"],
+      techStack: ["React", "JavaScript", "MongoDB", "REST APIs","Node.js", "Express.js", "Sass"],
+      image: "/images/tablemate.png",
+      github: "https://github.com/NicoleBiii/Table-Mate",
+      responsibilities: [
+        "Fully designed and developed from scratch as a solo project",
+        "Implemented QR-based ordering system with seamless scan → order → pay flow",
+        "Built RESTful API and session-based ordering logic with integrated payment feature",
+      ],
+      videoUrl: "/videos/tablemate.MOV",
+    },
+    {
+      title: "AI News",
+      description: "Hackathon project built with Google Gemini API to generate news discussion topics using AI.",
+      tags: ["AI", "Hackathon"],
+      techStack: ["React", "JavaScript", "REST APIs", "Google Gemini"],
+      image: "/images/simplenews.png",
+      github: "https://github.com/NicoleBiii/simple-news",
+      responsibilities: [
+        "Led development of frontend and backend using React and Node.js",
+        "Integrated Google Gemini API to auto-generate AI-powered discussion topics",
+      ],
+      videoUrl: "/videos/simplenews.mp4",
+    },
+    {
+      title: "True North",
+      description: "Collaborative Microsoft Hackathon site to check if brands are Canadian and suggest alternatives.",
+      tags: ["Team Project", "API", "Hackathon"],
+      techStack: ["React", "JavaScript", "MySQL", "Google Gemini"],
+      image: "/images/truenorth.png",
+      responsibilities: [
+        "Developed core frontend features using React and custom UI components",
+        "Handled API integration and logic for brand validation and recommendations",
+        "Worked cross-functionally with product managers and designers during the hackathon",
+      ],
+      videoUrl: "/videos/truenorth.mp4",
+    },
+    {
+      title: "Instock",
+      description: "Inventory management app built by 4-person team. I handled fuzzy search, attribute sorting, responsive UI and modals.",
+      tags: ["Agile", "Jira", "Responsive", "Backend Logic"],
+      techStack: ["React", "JavaScript", "MySQL", "Node.js", "Express.js"],
+      image: "/images/instock.png",
+      github: "https://github.com/olivia-onuk/instock-full-stack-attack",
+      responsibilities: [
+        "Implemented backend fuzzy search and dynamic attribute-based sorting",
+        "Built responsive UI components and interactive modals",
+        "Worked in an Agile team using Jira and GitHub GitFlow; earned 98.6% project score for code quality and teamwork",
+      ],
+      videoUrl: "/videos/instock.mp4",
+    },
+  ];

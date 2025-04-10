@@ -32,7 +32,7 @@ export default function ProjectCard({
 
       {/* Hover Card - Floating up */}
       <AnimatePresence>
-        {isHovered && (
+        { active &&isHovered && (
           <motion.div
             initial={{ y: -30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

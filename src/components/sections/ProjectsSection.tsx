@@ -54,9 +54,19 @@ export default function ProjectsSection() {
                 `,
                 opacity,
                 zIndex,
-                pointerEvents: isActive ? "auto" : "none",
+                pointerEvents: Math.abs(offset) <= 1 ? "auto" : "none",
               }}
-              onClick={() => isActive && setSelectedProject(project)}
+              onClick={() => {
+                if (isActive) {
+                  setSelectedProject(project);
+                } else {
+                  const index = projects.findIndex((p) => p.title === project.title);
+                  const direction = index > current ? 1 : -1;
+                  setCurrent((prev) =>
+                    Math.max(0, Math.min(projects.length - 1, prev + direction))
+                  );
+                }
+              }}
             >
               <ProjectCard project={project} active={isActive} />
             </div>

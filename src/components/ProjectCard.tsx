@@ -12,7 +12,7 @@ export default function ProjectCard({
 
   return (
     <div
-      className="relative group w-full h-full p-6 bg-white/30 dark:bg-black/30 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg flex flex-col transition-transform duration-300 hover:scale-[1.02] cursor-pointer"
+      className="relative group w-full h-full p-6 bg-white/10 dark:bg-black/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg flex flex-col transition-transform duration-300 hover:scale-[1.02] cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
       {/* Cover Image */}

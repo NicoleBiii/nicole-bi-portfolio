@@ -56,7 +56,7 @@ export default function ProjectsSection() {
                 zIndex,
                 pointerEvents: isActive ? "auto" : "none",
               }}
-              onClick={() => isActive && setSelectedProject(project)} // 👈 点击激活卡片弹出 modal
+              onClick={() => isActive && setSelectedProject(project)}
             >
               <ProjectCard project={project} active={isActive} />
             </div>
@@ -64,7 +64,7 @@ export default function ProjectsSection() {
         })}
       </div>
 
-      {/* Modal 控制 */}
+      {/* Modal control */}
       {selectedProject && (
         <ProjectModal
           isOpen={!!selectedProject}
@@ -73,7 +73,7 @@ export default function ProjectsSection() {
         />
       )}
 
-      {/* 控制按钮 */}
+      {/* button */}
       <div className="flex gap-6 mt-8 z-30">
         <button
           onClick={() => setCurrent((prev) => Math.max(0, prev - 1))}

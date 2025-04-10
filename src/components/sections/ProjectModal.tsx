@@ -49,7 +49,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
           onClick={onClose} // click background to close
         >
           <motion.div
-            className="relative w-full max-w-3xl bg-white dark:bg-zinc-900 rounded-xl p-6 shadow-2xl max-h-[90vh] overflow-hidden flex flex-col "
+            className="relative w-full max-w-3xl bg-white dark:bg-zinc-900 rounded-xl p-6 shadow-2xl max-h-[90vh] overflow-hidden flex flex-col  border border-white/20 dark:text-white"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}

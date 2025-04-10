@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
-import useModalScrollLock from "../hooks/useModalScrollLock";
+import useModalScrollLock from "./hooks/useModalScrollLock";
 
 interface ProjectModalProps {
   isOpen: boolean;

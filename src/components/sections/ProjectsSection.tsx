@@ -3,7 +3,10 @@
 import { useState, useEffect } from "react";
 import { projects } from "../projectData";
 import ProjectCard from "../ProjectCard";
-import ProjectModal from "./ProjectModal";
+import ProjectModal from "../ProjectModal";
+
+import { motion } from "framer-motion";
+
 
 export default function ProjectsSection() {
   const [current, setCurrent] = useState(0);
@@ -29,7 +32,14 @@ export default function ProjectsSection() {
       className="h-screen w-full flex flex-col justify-center items-center snap-start relative overflow-hidden"
     >
       {/* Card container */}
-      <div className="relative w-full h-[70vh]" style={{ transformStyle: "preserve-3d" }}>
+      <motion.div 
+        className="relative w-full h-[70vh]" 
+        style={{ transformStyle: "preserve-3d" }}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+      >
         {projects.map((project, index) => {
           const offset = index - current;
           const isActive = offset === 0;
@@ -72,7 +82,7 @@ export default function ProjectsSection() {
             </div>
           );
         })}
-      </div>
+      </motion.div>
 
       {/* Modal control */}
       {selectedProject && (
@@ -84,7 +94,13 @@ export default function ProjectsSection() {
       )}
 
       {/* button */}
-      <div className="flex gap-6 mt-8 z-30">
+      <motion.div 
+        className="flex gap-6 mt-8 z-30"
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
+        viewport={{ once: true }}
+      >
         <button
           onClick={() => setCurrent((prev) => Math.max(0, prev - 1))}
           className="px-4 py-2 rounded-full dark:text-white bg-white/10 dark:bg-black/10 transition transform hover:scale-110 hover:bg-white/20 dark:hover:bg-black/20"
@@ -97,7 +113,7 @@ export default function ProjectsSection() {
         >
           →
         </button>
-      </div>
+      </motion.div>
     </section>
   );
 }

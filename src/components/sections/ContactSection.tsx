@@ -34,7 +34,7 @@ export default function ContactSection() {
           <h2 className="text-4xl md:text-5xl font-bold">
             Let’s work together
           </h2>
-          <p className="text-gray-300">
+          <p className="text-white dark:text-gray-300">
             Have a project in mind? Let’s build something great.
           </p>
           <div className="flex justify-center md:justify-start gap-6 text-2xl">
@@ -95,7 +95,7 @@ export default function ContactSection() {
               />
               <button
                 type="submit"
-                className="w-full py-3 rounded-lg bg-white/80 text-black font-semibold hover:bg-white transition"
+                className="w-full py-3 rounded-lg bg-white/80 text-gray-400 dark:text-black font-semibold hover:bg-white transition"
               >
                 Send Message
               </button>

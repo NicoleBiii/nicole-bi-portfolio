@@ -89,14 +89,14 @@ export default function FullpageWrapper() {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting && !scrollLockRef.current) {
+        if (entry.isIntersecting) {
           const id = entry.target.id;
           if (id !== activeRef.current) {
             setActive(id);
             activeRef.current = id;
           }
-        }        
-      });
+        }
+    });
     }, { threshold: [0.75, 0.9], rootMargin: "0px 0px -20% 0px" });
   
     const timer = setTimeout(() => {

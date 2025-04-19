@@ -22,7 +22,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="min-h-screen w-full flex justify-center items-center px-6 sm:px-8 md:px-16 py-12 text-white snap-start">
+      className="min-h-screen w-full flex justify-center items-center px-6 sm:px-8 md:px-16 py-12 text-black dark:text-white snap-start">
       <div className="max-w-6xl w-full flex flex-col sm:flex-row items-center justify-around gap-8 sm:gap-14">
         {/* Left: Profile Image - hidden on mobile */}
         <motion.div
@@ -55,7 +55,7 @@ export default function AboutSection() {
             transition={{ type: "spring", stiffness: 300 }}
             className="text-xl sm:text-3xl md:text-4xl font-bold mb-4 text-balance relative group">
             Hi! I'm Nicole Bi
-            <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-white transition-all duration-500 group-hover:w-full" />
+            <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black dark:bg-white transition-all duration-500 group-hover:w-full" />
           </motion.h2>
           <motion.p variants={paragraph} className="mb-4">
             — a developer with a background in Electrical Engineering and a love

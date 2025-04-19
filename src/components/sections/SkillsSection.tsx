@@ -54,7 +54,7 @@ export default function SkillsSection() {
   return (
     <section
       id="skills"
-      className="h-screen w-full flex flex-col justify-center items-center text-white px-4 snap-start"
+      className="h-screen w-full flex flex-col justify-center items-center text-black dark:text-white px-4 snap-start"
     >
       {/* title */}
       <motion.h2
@@ -82,7 +82,7 @@ export default function SkillsSection() {
             className="text-2xl font-semibold mb-4 relative group"
           >
             Frontend
-            <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-white transition-all duration-500 group-hover:w-full" />
+            <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-black dark:bg-white transition-all duration-500 group-hover:w-full" />
           </motion.h3>
           <div className="flex flex-wrap justify-center gap-4">
             <SkillIcon icon={<FaReact />} title="React" />
@@ -103,7 +103,7 @@ export default function SkillsSection() {
             className="text-2xl font-semibold mb-4 relative group"
           >
             Backend
-            <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-white transition-all duration-500 group-hover:w-full" />
+            <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-black dark:bg-white transition-all duration-500 group-hover:w-full" />
           </motion.h3>
           <div className="flex flex-wrap justify-center gap-4">
             <SkillIcon icon={<FaNodeJs />} title="Node.js" />
@@ -121,7 +121,7 @@ export default function SkillsSection() {
             className="text-2xl font-semibold mb-4 relative group"
           >
             Tools
-            <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-white transition-all duration-500 group-hover:w-full" />
+            <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-black dark:bg-white transition-all duration-500 group-hover:w-full" />
           </motion.h3>
           <div className="flex flex-wrap justify-center gap-4">
             <SkillIcon imageSrc={VsCodeIcon} title="VS Code" />

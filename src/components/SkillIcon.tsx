@@ -45,7 +45,7 @@ export default function SkillIcon({ icon, imageSrc, title }: SkillIconProps) {
               alt={title}
               width={40}
               height={40}
-              className="mx-auto"
+              className="mx-auto invert dark:invert-0"
             />
           ))}
       </motion.div>

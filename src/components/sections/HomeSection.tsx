@@ -1,12 +1,25 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import { FaGithub, FaLinkedin, FaEnvelope, FaFileAlt } from "react-icons/fa";
+import { ChevronDown } from "lucide-react";
 import MagneticIcon from "../MagneticIcon";
+
+const roles = ["Backend Developer", "Full-Stack Developer"];
 
 const title = "Nicole Bi";
 
 export default function HomeSection() {
+  const [roleIndex, setRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex((i) => (i + 1) % roles.length);
+    }, 3200);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <motion.section
       id="home"
@@ -58,27 +71,37 @@ export default function HomeSection() {
         ))}
       </motion.h1>
 
-      <motion.p
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.8 }}
-        className="mt-4 text-xl text-black dark:text-gray-400 text-center md:text-left max-w-xs md:max-w-full">
-        Fullstack developer
-        <br className="md:hidden" /> based in Toronto
-      </motion.p>
+      {/* Cycling role text */}
+      <div className="mt-4 h-8 overflow-hidden flex items-center">
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={roleIndex}
+            initial={{ y: 24, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -24, opacity: 0 }}
+            transition={{ duration: 0.45, ease: "easeInOut" }}
+            className="text-xl text-black dark:text-gray-400 text-center md:text-left">
+            {roles[roleIndex]}
+            <span className="text-black/40 dark:text-white/30"> · Toronto</span>
+          </motion.p>
+        </AnimatePresence>
+      </div>
 
       <motion.p
         initial={{ opacity: 0.4 }}
         animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.02, 1] }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         className="text-sm mt-4 italic text-black dark:text-white/60 tracking-wide">
         Designing seamless digital experiences.
       </motion.p>
+
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-black/40 dark:text-white/30"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}>
+        <ChevronDown size={22} />
+      </motion.div>
 
       <div className="absolute bottom-12 flex gap-6 items-center justify-center">
         <MagneticIcon>

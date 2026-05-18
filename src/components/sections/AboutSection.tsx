@@ -58,13 +58,19 @@ export default function AboutSection() {
             <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-black dark:bg-white transition-all duration-500 group-hover:w-full" />
           </motion.h2>
           <motion.p variants={paragraph} className="mb-4">
-            — a developer with a background in Electrical Engineering and a love
-            for writing clean, creative code.
+            — a full-stack developer with a year of professional backend
+            experience shipping production APIs at{" "}
+            <span className="font-semibold">Shack Shine · O2E Brands</span>.
           </motion.p>
           <motion.p variants={paragraph} className="mb-4">
-            I’ve always enjoyed tech — not just learning it, but building things
-            with it. That’s what led me to focus on software development, where
-            I get to solve problems and bring ideas to life.
+            I proposed and led NestJS adoption for a greenfield franchise
+            platform, owned its core service-appointment microservice, and built
+            integrations with Salesforce, Podium, and AWS S3.
+          </motion.p>
+          <motion.p variants={paragraph} className="mb-4">
+            Background in Electrical Engineering, Master’s in Computer Science.
+            I care about clean architecture, fast feedback loops, and shipping
+            things that actually work in production.
           </motion.p>
         </motion.div>
       </div>

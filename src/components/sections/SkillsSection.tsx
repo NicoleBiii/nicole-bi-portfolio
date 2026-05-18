@@ -6,6 +6,7 @@ import {
   FaGitAlt,
   FaDocker,
   FaJava,
+  FaAws,
 } from "react-icons/fa";
 import {
   SiNextdotjs,
@@ -19,6 +20,9 @@ import {
   SiMongodb,
   SiMysql,
   SiPython,
+  SiNestjs,
+  SiPostgresql,
+  SiJest,
 } from "react-icons/si";
 import RestApiIcon from "../../../public/icons/rest-api.png";
 import VsCodeIcon from "../../../public/icons/vscode.svg";
@@ -50,6 +54,12 @@ const titleVariant = {
   show: { opacity: 1, y: 0 },
 };
 
+const marqueeSkills = [
+  "NestJS", "TypeScript", "PostgreSQL", "React", "Next.js", "Node.js",
+  "AWS S3", "Docker", "MongoDB", "MySQL", "Jest", "Framer Motion",
+  "Tailwind CSS", "Sass", "Git", "REST API", "WebSocket", "Express.js",
+];
+
 export default function SkillsSection() {
   return (
     <section
@@ -66,6 +76,17 @@ export default function SkillsSection() {
       >
         My Skills
       </motion.h2>
+
+      {/* Marquee strip */}
+      <div className="w-full overflow-hidden mb-8 py-2 border-y border-black/10 dark:border-white/10">
+        <div className="flex w-max animate-marquee gap-8 whitespace-nowrap">
+          {[...marqueeSkills, ...marqueeSkills].map((skill, i) => (
+            <span key={i} className="text-sm font-medium text-black/50 dark:text-white/40 tracking-wide">
+              {skill} <span className="mx-1 text-black/20 dark:text-white/20">·</span>
+            </span>
+          ))}
+        </div>
+      </div>
 
       {/* skills container */}
       <motion.div
@@ -106,11 +127,14 @@ export default function SkillsSection() {
             <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-black dark:bg-white transition-all duration-500 group-hover:w-full" />
           </motion.h3>
           <div className="flex flex-wrap justify-center gap-4">
+            <SkillIcon icon={<SiNestjs />} title="NestJS" />
             <SkillIcon icon={<FaNodeJs />} title="Node.js" />
             <SkillIcon icon={<SiExpress />} title="Express.js" />
+            <SkillIcon icon={<SiPostgresql />} title="PostgreSQL" />
             <SkillIcon icon={<SiMysql />} title="MySQL" />
-            <SkillIcon imageSrc={RestApiIcon} title="REST API" />
             <SkillIcon icon={<SiMongodb />} title="MongoDB" />
+            <SkillIcon imageSrc={RestApiIcon} title="REST API" />
+            <SkillIcon icon={<SiJest />} title="Jest" />
           </div>
         </motion.div>
 
@@ -124,9 +148,10 @@ export default function SkillsSection() {
             <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-black dark:bg-white transition-all duration-500 group-hover:w-full" />
           </motion.h3>
           <div className="flex flex-wrap justify-center gap-4">
-            <SkillIcon imageSrc={VsCodeIcon} title="VS Code" />
+            <SkillIcon icon={<FaAws />} title="AWS" />
             <SkillIcon icon={<FaDocker />} title="Docker" />
             <SkillIcon icon={<FaGitAlt />} title="Git" />
+            <SkillIcon imageSrc={VsCodeIcon} title="VS Code" />
             <SkillIcon icon={<SiPython />} title="Python" />
             <SkillIcon icon={<FaJava />} title="Java" />
           </div>

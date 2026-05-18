@@ -10,7 +10,7 @@ import darkModeAnimation from '../../public/animations/darkmode-toggle.json'
 
 import { useDarkMode } from "@/context/DarkModeContext";
 
-const sections = ["About", "Skills", "Projects", "Contact"];
+const sections = ["About", "Experience", "Skills", "Projects", "Contact"];
 
 const navContainer = {
   hidden: {},

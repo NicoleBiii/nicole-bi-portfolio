@@ -4,6 +4,7 @@ import { useEffect, useState, useRef, useMemo } from "react"
 import Navbar from "./Navbar"
 import HomeSection from "@/components/sections/HomeSection";
 import AboutSection from "@/components/sections/AboutSection";
+import ExperienceSection from "@/components/sections/ExperienceSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import ContactSection from "@/components/sections/ContactSection";
@@ -12,7 +13,7 @@ const DynamicBackground = dynamic(() => import("./DynamicBackground"), {
   ssr: false,
 });
 
-const sections = ["home", "about", "skills", "projects", "contact"]
+const sections = ["home", "about", "experience", "skills", "projects", "contact"]
 
 export default function FullpageWrapper() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -153,6 +154,7 @@ export default function FullpageWrapper() {
         <DynamicBackground />
         <HomeSection />
         <AboutSection />
+        <ExperienceSection />
         <SkillsSection />
         <ProjectsSection />
         <ContactSection />

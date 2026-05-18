@@ -1,12 +1,15 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { projects } from "./projectData";
+
+type Project = (typeof projects)[0] & { demo?: string };
 
 export default function ProjectCard({
   project,
   active,
 }: {
-  project: any;
+  project: Project;
   active?: boolean;
 }) {
   const [isHovered, setIsHovered] = useState(false);

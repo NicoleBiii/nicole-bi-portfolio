@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef, useMemo } from "react"
+import { useEffect, useState, useRef } from "react"
 import Navbar from "./Navbar"
 import HomeSection from "@/components/sections/HomeSection";
 import AboutSection from "@/components/sections/AboutSection";
@@ -22,16 +22,13 @@ export default function FullpageWrapper() {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const activeRef = useRef(active);
 
-  const debounce = (fn: (...args: any[]) => void, delay = 300) => {
+  const debounce = (fn: (id: string) => void, delay = 300) => {
     let timer: NodeJS.Timeout;
-    return (...args: any[]) => {
+    return (id: string) => {
       clearTimeout(timer);
-      timer = setTimeout(() => fn(...args), delay);
+      timer = setTimeout(() => fn(id), delay);
     };
   };
-  
-
-  const currentIndex = useMemo(() => sections.indexOf(active), [active])
 
   useEffect(() => {
     activeRef.current = active;

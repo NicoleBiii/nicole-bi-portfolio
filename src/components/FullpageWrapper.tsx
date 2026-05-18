@@ -1,9 +1,10 @@
 "use client"
 
-import { useEffect, useState, useRef, useMemo } from "react"
+import { useEffect, useState, useRef } from "react"
 import Navbar from "./Navbar"
 import HomeSection from "@/components/sections/HomeSection";
 import AboutSection from "@/components/sections/AboutSection";
+import ExperienceSection from "@/components/sections/ExperienceSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import ContactSection from "@/components/sections/ContactSection";
@@ -12,7 +13,7 @@ const DynamicBackground = dynamic(() => import("./DynamicBackground"), {
   ssr: false,
 });
 
-const sections = ["home", "about", "skills", "projects", "contact"]
+const sections = ["home", "about", "experience", "skills", "projects", "contact"]
 
 export default function FullpageWrapper() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -21,16 +22,13 @@ export default function FullpageWrapper() {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   const activeRef = useRef(active);
 
-  const debounce = (fn: (...args: any[]) => void, delay = 300) => {
+  const debounce = (fn: (id: string) => void, delay = 300) => {
     let timer: NodeJS.Timeout;
-    return (...args: any[]) => {
+    return (id: string) => {
       clearTimeout(timer);
-      timer = setTimeout(() => fn(...args), delay);
+      timer = setTimeout(() => fn(id), delay);
     };
   };
-  
-
-  const currentIndex = useMemo(() => sections.indexOf(active), [active])
 
   useEffect(() => {
     activeRef.current = active;
@@ -152,6 +150,7 @@ export default function FullpageWrapper() {
         <DynamicBackground />
         <HomeSection />
         <AboutSection />
+        <ExperienceSection />
         <SkillsSection />
         <ProjectsSection />
         <ContactSection />

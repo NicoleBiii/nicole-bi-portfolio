@@ -120,25 +120,45 @@ export default function ProjectsSection() {
         />
       )}
 
-      {/* button */}
+      {/* Controls: arrows + dot indicators */}
       <motion.div
-        className="flex gap-6 mt-8 z-30"
+        className="flex flex-col items-center gap-3 mt-6 z-30"
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.6, duration: 0.5, ease: "easeOut" }}
         viewport={{ once: true }}>
-        <button
-          onClick={() => setCurrent((prev) => Math.max(0, prev - 1))}
-          className="px-4 py-2 rounded-full dark:text-white bg-white/10 dark:bg-black/10 transition transform hover:scale-110 hover:bg-white/20 dark:hover:bg-black/20">
-          ←
-        </button>
-        <button
-          onClick={() =>
-            setCurrent((prev) => Math.min(projects.length - 1, prev + 1))
-          }
-          className="px-4 py-2 rounded-full dark:text-white bg-white/10 dark:bg-black/10 transition transform hover:scale-110 hover:bg-white/20 dark:hover:bg-black/20">
-          →
-        </button>
+
+        {/* Dot indicators */}
+        <div className="flex gap-2 items-center">
+          {projects.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              aria-label={`Go to project ${i + 1}`}
+              className={`rounded-full transition-all duration-300 ${
+                i === current
+                  ? "w-5 h-2 bg-black dark:bg-white"
+                  : "w-2 h-2 bg-black/30 dark:bg-white/30 hover:bg-black/60 dark:hover:bg-white/60"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Arrow buttons */}
+        <div className="flex gap-4">
+          <button
+            onClick={() => setCurrent((prev) => Math.max(0, prev - 1))}
+            className="px-4 py-2 rounded-full dark:text-white bg-white/10 dark:bg-black/10 transition transform hover:scale-110 hover:bg-white/20 dark:hover:bg-black/20 disabled:opacity-30"
+            disabled={current === 0}>
+            ←
+          </button>
+          <button
+            onClick={() => setCurrent((prev) => Math.min(projects.length - 1, prev + 1))}
+            className="px-4 py-2 rounded-full dark:text-white bg-white/10 dark:bg-black/10 transition transform hover:scale-110 hover:bg-white/20 dark:hover:bg-black/20 disabled:opacity-30"
+            disabled={current === projects.length - 1}>
+            →
+          </button>
+        </div>
       </motion.div>
     </section>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import MobileMenu from "./MobileMenu"
@@ -10,7 +10,7 @@ import darkModeAnimation from '../../public/animations/darkmode-toggle.json'
 
 import { useDarkMode } from "@/context/DarkModeContext";
 
-const sections = ["About", "Skills", "Projects", "Contact"];
+const sections = ["About", "Experience", "Skills", "Projects", "Contact"];
 
 const navContainer = {
   hidden: {},
@@ -39,6 +39,7 @@ export default function Navbar({ active }: NavbarProps) {
   const navRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const lottieRef = useRef<any>(null)
 
   useEffect(() => {

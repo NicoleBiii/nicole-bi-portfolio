@@ -7,6 +7,7 @@ import { useDarkMode } from "../context/DarkModeContext";
 function DynamicBackground() {
   const { darkMode } = useDarkMode();
   const bgRef = useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const bgInstance = useRef<any>(null);
 
   const uniqueId = useMemo(() => `blur-bg-${Math.random().toString(36).substring(2, 10)}`, []);

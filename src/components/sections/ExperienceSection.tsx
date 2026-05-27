@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const experiences = [
   {
-    role: "Junior Software Developer",
+    role: "Software Developer",
     company: "Shack Shine · O2E Brands",
     period: "Jun 2025 – May 2026",
     location: "Toronto, ON",

@@ -30,6 +30,7 @@ export default function FullpageWrapper() {
     };
   };
 
+
   useEffect(() => {
     activeRef.current = active;
   }, [active]);

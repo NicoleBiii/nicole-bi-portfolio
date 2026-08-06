@@ -11,6 +11,7 @@ interface BlurGradientBgInstance {
 function DynamicBackground() {
   const { darkMode } = useDarkMode();
   const bgRef = useRef<HTMLDivElement>(null);
+
   const bgInstance = useRef<BlurGradientBgInstance | null>(null);
 
   const uniqueId = useMemo(() => `blur-bg-${Math.random().toString(36).substring(2, 10)}`, []);

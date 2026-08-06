@@ -24,8 +24,8 @@ import {
   SiPostgresql,
   SiJest,
 } from "react-icons/si";
-import RestApiIcon from "../../../public/icons/rest-api.png";
-import VsCodeIcon from "../../../public/icons/vscode.svg";
+import { TbApi } from "react-icons/tb";
+import { VscVscode } from "react-icons/vsc";
 import SkillIcon from "../SkillIcon";
 import { motion } from "framer-motion";
 
@@ -133,7 +133,7 @@ export default function SkillsSection() {
             <SkillIcon icon={<SiPostgresql />} title="PostgreSQL" />
             <SkillIcon icon={<SiMysql />} title="MySQL" />
             <SkillIcon icon={<SiMongodb />} title="MongoDB" />
-            <SkillIcon imageSrc={RestApiIcon} title="REST API" />
+            <SkillIcon icon={<TbApi />} title="REST API" />
             <SkillIcon icon={<SiJest />} title="Jest" />
           </div>
         </motion.div>
@@ -151,7 +151,7 @@ export default function SkillsSection() {
             <SkillIcon icon={<FaAws />} title="AWS" />
             <SkillIcon icon={<FaDocker />} title="Docker" />
             <SkillIcon icon={<FaGitAlt />} title="Git" />
-            <SkillIcon imageSrc={VsCodeIcon} title="VS Code" />
+            <SkillIcon icon={<VscVscode />} title="VS Code" />
             <SkillIcon icon={<SiPython />} title="Python" />
             <SkillIcon icon={<FaJava />} title="Java" />
           </div>

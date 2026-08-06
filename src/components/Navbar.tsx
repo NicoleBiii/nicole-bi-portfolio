@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import MobileMenu from "./MobileMenu"
@@ -39,6 +39,7 @@ export default function Navbar({ active }: NavbarProps) {
   const navRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const lottieRef = useRef<any>(null)
 
   useEffect(() => {

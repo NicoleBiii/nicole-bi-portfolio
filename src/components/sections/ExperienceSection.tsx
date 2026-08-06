@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { FaAws } from "react-icons/fa";
 
 const experiences = [
   {
@@ -37,6 +38,11 @@ const educations = [
   { school: "BrainStation", degree: "Diploma — Software Developer", period: "Jan – Apr 2025", location: "Toronto, ON" },
   { school: "Laurentian University", degree: "MSc — Computer Science", period: "Jan 2023 – Aug 2024", location: "Sudbury, ON" },
   { school: "Chongqing University", degree: "BEng — Electrical Engineering", period: "Sep 2017 – Jul 2021", location: "Chongqing, China" },
+];
+
+const certifications = [
+  { name: "AWS Certified AI Practitioner", issuer: "Amazon Web Services", date: "Jul 2026" },
+  { name: "AWS Certified Cloud Practitioner", issuer: "Amazon Web Services", date: "Jul 2026" },
 ];
 
 export default function ExperienceSection() {
@@ -135,6 +141,33 @@ export default function ExperienceSection() {
                   <span className="text-sm text-black/60 dark:text-white/60"> — {edu.degree}</span>
                 </div>
                 <span className="text-sm text-black/40 dark:text-white/40 shrink-0">{edu.period}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Certifications */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="mt-12"
+        >
+          <h3 className="text-2xl font-semibold mb-6">Certifications</h3>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {certifications.map((cert, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-3 rounded-xl border border-black/10 dark:border-white/10 bg-white/5 dark:bg-white/5 px-4 py-3 backdrop-blur-sm transition-colors hover:border-orange-400/50"
+              >
+                <FaAws className="text-2xl shrink-0 mt-0.5 text-[#FF9900]" />
+                <div className="min-w-0">
+                  <p className="font-medium text-sm leading-snug">{cert.name}</p>
+                  <p className="text-xs text-black/50 dark:text-white/50 mt-0.5">
+                    {cert.issuer} · {cert.date}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
